@@ -1,5 +1,7 @@
 #!/bin/bash
-# /var/lib/cloud/scripts/per-instance/001_onboot
+
+set -e
+
 echo $(date -u) ": System provisioning started." >>/var/log/per-instance.log
 
 MYSQL_ROOT_PASS=$(openssl rand -hex 24)
@@ -18,9 +20,10 @@ EOM
 mysql -u root -e "CREATE DATABASE $CHEVERETO_DB_NAME;"
 mysql -u root -e "CREATE USER '$CHEVERETO_DB_USER'@'$CHEVERETO_DB_HOST' IDENTIFIED BY '$CHEVERETO_DB_PASS';"
 mysql -u root -e "GRANT ALL ON *.* TO '$CHEVERETO_DB_USER'@'$CHEVERETO_DB_HOST';"
-mysql -u root -e "ALTER USER 'debian-sys-maint'@'localhost' IDENTIFIED BY '$DEBIAN_SYS_MAINT_MYSQL_PASS';"
 
 mysqladmin -u root -h localhost password ${MYSQL_ROOT_PASS}
+mysql -uroot -p${MYSQL_ROOT_PASS} \
+    -e "ALTER USER 'debian-sys-maint'@'localhost' IDENTIFIED BY '$DEBIAN_SYS_MAINT_MYSQL_PASS';"
 
 SECURE_MYSQL=$(expect -c "
 set timeout 10
