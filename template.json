@@ -1,0 +1,75 @@
+
+{
+    "variables": {
+      "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}",
+      "image_name": "chevereto-digitalocean-{{timestamp}}",
+      "apt_packages": "apache2 libapache2-mod-php mysql-server php php-common php-cli php-curl php-fileinfo php-gd php-imagick php-intl php-json php-mbstring php-mysql php-opcache php-pdo php-pdo-mysql php-xml php-xmlrpc php-zip python3-certbot-apache software-properties-common unzip",
+      "application_name": "Chevereto",
+      "application_version": "1.3.0"
+    },
+    "sensitive-variables": ["do_api_token"],
+    "builders": [
+      {
+        "type": "digitalocean",
+        "api_token": "{{user `do_api_token`}}",
+        "image": "ubuntu-20-04-x64",
+        "region": "nyc3",
+        "size": "s-1vcpu-1gb",
+        "ssh_username": "root",
+        "snapshot_name": "{{user `image_name`}}"
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "shell",
+        "inline": [
+          "cloud-init status --wait"
+        ]
+      },
+      {
+        "type": "file",
+        "source": "files/var/",
+        "destination": "/var/"
+      },
+      {
+        "type": "file",
+        "source": "files/etc/",
+        "destination": "/etc/"
+      },
+      {
+        "type": "shell",
+        "environment_vars": [
+          "DEBIAN_FRONTEND=noninteractive",
+          "LC_ALL=C",
+          "LANG=en_US.UTF-8",
+          "LC_CTYPE=en_US.UTF-8"
+        ],
+        "inline": [
+          "apt -qqy update",
+          "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade",
+          "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install {{user `apt_packages`}}",
+          "apt-get -qqy clean"
+        ]
+      },
+      {
+        "type": "shell",
+        "environment_vars": [
+          "application_name={{user `application_name`}}",
+          "application_version={{user `application_version`}}",
+          "DEBIAN_FRONTEND=noninteractive",
+          "LC_ALL=C",
+          "LANG=en_US.UTF-8",
+          "LC_CTYPE=en_US.UTF-8"
+        ],
+        "scripts": [
+          "scripts/010-php.sh",
+          "scripts/011-chevereto.sh",
+          "scripts/012-apache.sh",
+          "common/scripts/014-ufw-apache.sh",
+          "common/scripts/018-force-ssh-logout.sh",
+          "common/scripts/020-application-tag.sh",
+          "common/scripts/900-cleanup.sh"
+        ]
+      }
+    ]
+  }
