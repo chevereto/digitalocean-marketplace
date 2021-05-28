@@ -1,9 +1,9 @@
 #!/bin/bash
 
 WORKING_DIR="/var/www/html"
-CHEVERETO_SOFTWARE=chevereto-free
-CHEVERETO_TAG=1.3.0
-CHEVERETO_INSTALLER_TAG=2.2.2
+CHEVERETO_SOFTWARE=${software_chevereto}
+CHEVERETO_TAG=${software_tag}
+CHEVERETO_INSTALLER_TAG=${software_installer_tag}
 CHEVERETO_LICENSE=
 rm -rf /var/www/html/*
 mkdir /chevereto && mkdir -p /chevereto/{download,installer}
