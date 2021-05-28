@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 echo $(date -u) ": System provisioning started." >>/var/log/per-instance.log
 
 MYSQL_ROOT_PASS=$(openssl rand -hex 24)
