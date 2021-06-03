@@ -20,27 +20,31 @@ mysql -u root -e "CREATE USER '$CHEVERETO_DB_USER'@'$CHEVERETO_DB_HOST' IDENTIFI
 mysql -u root -e "GRANT ALL ON *.* TO '$CHEVERETO_DB_USER'@'$CHEVERETO_DB_HOST';"
 
 mysqladmin -u root -h localhost password $MYSQL_ROOT_PASS
+
 mysql -uroot -p${MYSQL_ROOT_PASS} \
     -e "ALTER USER 'debian-sys-maint'@'localhost' IDENTIFIED BY '$DEBIAN_SYS_MAINT_MYSQL_PASS';"
 
-# SECURE_MYSQL=$(expect -c "
-# set timeout 10
-# spawn mysql_secure_installation
-# expect \"Enter current password for root (enter for none):\"
-# send \"$DEBIAN_SYS_MAINT_MYSQL_PASS\r\"
-# expect \"Change the root password?\"
-# send \"n\r\"
-# expect \"Remove anonymous users?\"
-# send \"y\r\"
-# expect \"Disallow root login remotely?\"
-# send \"y\r\"
-# expect \"Remove test database and access to it?\"
-# send \"y\r\"
-# expect \"Reload privilege tables now?\"
-# send \"y\r\"
-# expect eof
-# ")
-# echo "$SECURE_MYSQL"
+MYSQL_ROOT_PASSWORD=${DEBIAN_SYS_MAINT_MYSQL_PASS}
+
+SECURE_MYSQL=$(expect -c "
+set timeout 10
+spawn mysql_secure_installation
+expect \"Enter current password for root (enter for none):\"
+send \"$MYSQL_ROOT_PASSWORD\r\"
+expect \"Change the root password?\"
+send \"n\r\"
+expect \"Remove anonymous users?\"
+send \"y\r\"
+expect \"Disallow root login remotely?\"
+send \"y\r\"
+expect \"Remove test database and access to it?\"
+send \"y\r\"
+expect \"Reload privilege tables now?\"
+send \"y\r\"
+expect eof
+")
+
+echo "$SECURE_MYSQL"
 
 set -eux
 {

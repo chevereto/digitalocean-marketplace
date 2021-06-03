@@ -8,7 +8,13 @@ Make `001-onboot.sh` executable.
 chmod +x files/var/lib/cloud/scripts/per-instance/001-onboot.sh
 ```
 
-Then run:
+Make `99-one-click.sh` executable.
+
+```sh
+chmod +x files/etc/update-motd.d/99-one-click.sh
+```
+
+Run:
 
 ```sh
 packer build marketplace-image.json

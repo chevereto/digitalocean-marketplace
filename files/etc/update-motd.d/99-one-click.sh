@@ -17,7 +17,8 @@ On the server:
  * The default web root is located at /var/www/html
  * The MySQL root password is saved at
    in /root/.mysql_password
- * Certbot is preinstalled. Run it to configure HTTPS.
+ * Certbot is preinstalled, to configure HTTPS run:
+   certbot --apache -d example.com -d example.com
 
 IMPORTANT:
    After connecting to the Droplet for the first time,
