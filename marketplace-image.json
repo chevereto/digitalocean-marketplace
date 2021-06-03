@@ -66,14 +66,14 @@
           "LC_CTYPE=en_US.UTF-8"
         ],
         "scripts": [
-          "scripts/010-php.sh",
-          "scripts/011-chevereto.sh",
-          "scripts/012-apache.sh",
-          "common/scripts/003-force-ssh-logout.sh",
-          "common/scripts/014-ufw-apache.sh",
-          "common/scripts/020-application-tag.sh",
-          "common/scripts/900-cleanup.sh",
-          "common/scripts/999-img-check.sh"
+          "scripts/10-php.sh",
+          "scripts/11-chevereto.sh",
+          "scripts/12-apache.sh",
+          "common/scripts/03-force-ssh-logout.sh",
+          "common/scripts/14-ufw-apache.sh",
+          "common/scripts/20-application-tag.sh",
+          "common/scripts/90-cleanup.sh",
+          "common/scripts/99-img-check.sh"
         ]
       }
     ]
