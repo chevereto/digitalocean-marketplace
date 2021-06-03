@@ -8,10 +8,10 @@ Make `001-onboot.sh` executable.
 chmod +x files/var/lib/cloud/scripts/per-instance/001-onboot.sh
 ```
 
-Make `99-one-click.sh` executable.
+Make `999-one-click.sh` executable.
 
 ```sh
-chmod +x files/etc/update-motd.d/99-one-click.sh
+chmod +x files/etc/update-motd.d/999-one-click.sh
 ```
 
 Run:
