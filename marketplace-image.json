@@ -23,12 +23,6 @@
     ],
     "provisioners": [
       {
-        "type": "shell",
-        "inline": [
-          "cloud-init status --wait"
-        ]
-      },
-      {
         "type": "file",
         "source": "files/var/",
         "destination": "/var/"
@@ -37,6 +31,14 @@
         "type": "file",
         "source": "files/etc/",
         "destination": "/etc/"
+      },
+      {
+        "type": "shell",
+        "inline": [
+          "cloud-init status --wait",
+          "chmod +x /var/lib/cloud/scripts/per-instance/001_onboot",
+          "chmod +x /etc/update-motd.d/99-one-click"
+        ]
       },
       {
         "type": "shell",
