@@ -8,7 +8,7 @@
 [![Discord](https://img.shields.io/discord/759137550312407050?style=flat-square)](https://chv.to/discord)
 [![Twitter Follow](https://img.shields.io/twitter/follow/chevereto?style=social)](https://twitter.com/chevereto)
 
-This repository provides the Chevereto [DigitalOcean Marketplace](https://github.com/digitalocean/marketplace-partners) application.
+This repository provides the Chevereto [DigitalOcean Marketplace](https://marketplace.digitalocean.com/apps/chevereto?refcode=f800a079f4f1) application.
 
 Run:
 
