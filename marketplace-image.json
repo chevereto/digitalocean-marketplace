@@ -1,82 +1,84 @@
-
 {
     "variables": {
-      "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}",
-      "image_name": "chevereto-1.3.0-installer-2.2.2-{{timestamp}}",
-      "apt_packages": "apache2 libapache2-mod-php mysql-server php php-common php-cli php-curl php-fileinfo php-gd php-imagick php-intl php-json php-mbstring php-mysql php-opcache php-pdo php-pdo-mysql php-xml php-xmlrpc php-zip python3-certbot-apache software-properties-common unzip",
-      "application_name": "Chevereto",
-      "software_chevereto": "chevereto-free",
-      "software_tag": "1.3.0",
-      "software_installer_tag": "2.2.2"
+        "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}",
+        "image_name": "chevereto-1.3.0-installer-2.2.2-{{timestamp}}",
+        "apt_packages": "apache2 libapache2-mod-php mysql-server php php-common php-cli php-curl php-fileinfo php-gd php-imagick php-intl php-json php-mbstring php-mysql php-opcache php-pdo php-pdo-mysql php-xml php-xmlrpc php-zip python3-certbot-apache software-properties-common unzip",
+        "application_name": "Chevereto",
+        "software_chevereto": "chevereto",
+        "software_tag": "3.20",
+        "software_installer_tag": "2.2.3"
     },
-    "sensitive-variables": ["do_api_token"],
+    "sensitive-variables": [
+        "do_api_token"
+    ],
     "builders": [
-      {
-        "type": "digitalocean",
-        "api_token": "{{user `do_api_token`}}",
-        "image": "ubuntu-20-04-x64",
-        "region": "nyc3",
-        "size": "s-1vcpu-1gb",
-        "ssh_username": "root",
-        "snapshot_name": "{{user `image_name`}}"
-      }
+        {
+            "type": "digitalocean",
+            "api_token": "{{user `do_api_token`}}",
+            "image": "ubuntu-20-04-x64",
+            "region": "nyc3",
+            "size": "s-1vcpu-1gb",
+            "ssh_username": "root",
+            "snapshot_name": "{{user `image_name`}}"
+        }
     ],
     "provisioners": [
-      {
-        "type": "file",
-        "source": "files/var/",
-        "destination": "/var/"
-      },
-      {
-        "type": "file",
-        "source": "files/etc/",
-        "destination": "/etc/"
-      },
-      {
-        "type": "shell",
-        "inline": [
-          "cloud-init status --wait",
-          "chmod +x /var/lib/cloud/scripts/per-instance/001_onboot",
-          "chmod +x /etc/update-motd.d/99-one-click"
-        ]
-      },
-      {
-        "type": "shell",
-        "environment_vars": [
-          "DEBIAN_FRONTEND=noninteractive",
-          "LC_ALL=C",
-          "LANG=en_US.UTF-8",
-          "LC_CTYPE=en_US.UTF-8"
-        ],
-        "inline": [
-          "apt -qqy update",
-          "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade",
-          "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install {{user `apt_packages`}}",
-          "apt-get -qqy clean"
-        ]
-      },
-      {
-        "type": "shell",
-        "environment_vars": [
-          "application_name={{user `application_name`}}",
-          "software_chevereto={{user `software_chevereto`}}",
-          "software_tag={{user `software_tag`}}",
-          "software_installer_tag={{user `software_installer_tag`}}",
-          "DEBIAN_FRONTEND=noninteractive",
-          "LC_ALL=C",
-          "LANG=en_US.UTF-8",
-          "LC_CTYPE=en_US.UTF-8"
-        ],
-        "scripts": [
-          "scripts/10-php.sh",
-          "scripts/11-chevereto.sh",
-          "scripts/12-apache.sh",
-          "common/scripts/03-force-ssh-logout.sh",
-          "common/scripts/14-ufw-apache.sh",
-          "common/scripts/20-application-tag.sh",
-          "common/scripts/90-cleanup.sh",
-          "common/scripts/99-img-check.sh"
-        ]
-      }
+        {
+            "type": "file",
+            "source": "files/var/",
+            "destination": "/var/"
+        },
+        {
+            "type": "file",
+            "source": "files/etc/",
+            "destination": "/etc/"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "cloud-init status --wait",
+                "chmod +x /var/lib/cloud/scripts/per-instance/001_onboot",
+                "chmod +x /etc/update-motd.d/99-one-click"
+            ]
+        },
+        {
+            "type": "shell",
+            "environment_vars": [
+                "DEBIAN_FRONTEND=noninteractive",
+                "LC_ALL=C",
+                "LANG=en_US.UTF-8",
+                "LC_CTYPE=en_US.UTF-8"
+            ],
+            "inline": [
+                "apt -qqy update",
+                "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade",
+                "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install {{user `apt_packages`}}",
+                "apt-get -qqy clean"
+            ]
+        },
+        {
+            "type": "shell",
+            "environment_vars": [
+                "application_name={{user `application_name`}}",
+                "software_chevereto={{user `software_chevereto`}}",
+                "software_tag={{user `software_tag`}}",
+                "software_installer_tag={{user `software_installer_tag`}}",
+                "DEBIAN_FRONTEND=noninteractive",
+                "LC_ALL=C",
+                "LANG=en_US.UTF-8",
+                "LC_CTYPE=en_US.UTF-8"
+            ],
+            "scripts": [
+                "scripts/10-php.sh",
+                "scripts/11-installer.sh",
+                "scripts/12-apache.sh",
+                "common/scripts/03-force-ssh-logout.sh",
+                "common/scripts/14-ufw-apache.sh",
+                "common/scripts/20-application-tag.sh",
+                "common/scripts/90-cleanup.sh",
+                "common/scripts/99-img-check.sh",
+                "scripts/99-apache-reload.sh"
+            ]
+        }
     ]
-  }
+}

@@ -1,6 +1,4 @@
-#!/bin/bash
-#
-# Configured as part of the DigitalOcean 1-Click Image build process
+#!/usr/bin/env bash
 
 myip=$(hostname -I | awk '{print$1}')
 cat <<EOF
@@ -13,9 +11,9 @@ cat <<EOF
 ╚██████╗██║  ██║███████╗ ╚████╔╝ ███████╗██║  ██║███████╗   ██║   ╚██████╔╝
  ╚═════╝╚═╝  ╚═╝╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝    ╚═════╝ 
 
-Welcome to DigitalOcean's One-Click Chevereto Droplet.
+Welcome to DigitalOcean's One-Click Chevereto server.
 
-To keep this Droplet secure, the UFW firewall is enabled.
+To keep this server secure, the UFW firewall is enabled.
 All ports are BLOCKED except 22 (SSH), 80 (HTTP), and 443 (HTTPS).
 
 In a web browser, you can view:
@@ -29,7 +27,7 @@ On the server:
    > certbot --apache -d example.com -d www.example.com
 
 IMPORTANT:
- * After connecting to the Droplet for the first time, immediately add the
+ * After connecting to the server for the first time, immediately add the
    Chevereto administrator at http://$myip
  * Secure your database by running:
    > mysql_secure_installation

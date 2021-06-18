@@ -1,10 +1,6 @@
-#!/bin/bash
-
-# DigitalOcean Marketplace Image Validation Tool
-# © 2021 DigitalOcean LLC.
-# This code is licensed under Apache 2.0 license (see LICENSE.md for details)
+#!/usr/bin/env bash
 
 cat >>/etc/ssh/sshd_config <<EOM
 Match User root
-        ForceCommand echo "Please wait while we get your droplet ready..."
+        ForceCommand echo "Please wait while we get your server ready..."
 EOM

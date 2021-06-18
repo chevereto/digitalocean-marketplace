@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # DigitalOcean Marketplace Image Validation Tool
 # © 2021 DigitalOcean LLC.

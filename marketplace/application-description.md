@@ -4,6 +4,4 @@ Chevereto is a self-hosted multipurpose multi-user, full-featured image sharing 
 
 ## Overview
 
-This is the Chevereto DigitalOcean Marketplace application, it provides Chevereto-Free auto installed.
-
-For ahead releases check our [pricing](<https://chevereto.com/pricing>).
+This is the Chevereto DigitalOcean Marketplace application, it provides Chevereto ready to be one-click installed.
