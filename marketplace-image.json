@@ -6,7 +6,7 @@
         "application_name": "Chevereto",
         "software_chevereto": "chevereto",
         "software_tag": "3.20",
-        "software_installer_tag": "2.2.3",
+        "installer_tag": "2.2.3",
         "working_dir": "/var/www/html"
     },
     "sensitive-variables": [
@@ -63,7 +63,7 @@
                 "application_name={{user `application_name`}}",
                 "software_chevereto={{user `software_chevereto`}}",
                 "software_tag={{user `software_tag`}}",
-                "software_installer_tag={{user `software_installer_tag`}}",
+                "CHEVERETO_INSTALLER_TAG={{user `installer_tag`}}",
                 "WORKING_DIR={{user `working_dir`}}",
                 "DEBIAN_FRONTEND=noninteractive",
                 "LC_ALL=C",
