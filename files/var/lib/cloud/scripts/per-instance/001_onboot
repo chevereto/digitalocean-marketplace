@@ -2,14 +2,14 @@
 
 echo $(date -u) ": System provisioning started." >>/var/log/per-instance.log
 
-MYSQL_ROOT_PASS=$(openssl rand -hex 24)
-DEBIAN_SYS_MAINT_MYSQL_PASS=$(openssl rand -hex 24)
+MYSQL_ROOT_PASS=$(openssl rand -hex 16)
+DEBIAN_SYS_MAINT_MYSQL_PASS=$(openssl rand -hex 16)
 
 CHEVERETO_DB_HOST=localhost
 CHEVERETO_DB_PORT=3306
 CHEVERETO_DB_NAME=chevereto
 CHEVERETO_DB_USER=chevereto
-CHEVERETO_DB_PASS=$(openssl rand -hex 24)
+CHEVERETO_DB_PASS=$(openssl rand -hex 16)
 
 cat >/root/.mysql_password <<EOM
 MYSQL_ROOT_PASS="${MYSQL_ROOT_PASS}"
@@ -26,20 +26,14 @@ mysql -uroot -p${MYSQL_ROOT_PASS} \
 
 set -eux
 {
-    echo "<?php"
-    echo "\$settings = ["
-    echo "    'db_host' => '$CHEVERETO_DB_HOST',"
-    echo "    'db_name' => '$CHEVERETO_DB_NAME',"
-    echo "    'db_user' => '$CHEVERETO_DB_USER',"
-    echo "    'db_pass' => '$CHEVERETO_DB_PASS',"
-    echo "    'db_port' => '$CHEVERETO_DB_PORT',"
-    echo "    'db_table_prefix' => 'chv_',"
-    echo "    'db_driver' => 'mysql',"
-    echo "    'debug_level' => 1,"
-    echo "];"
-} >/var/www/html/app/settings.php
-echo $(date -u) ": Created /var/www/html/app/settings.php" >>/var/log/per-instance.log
-chown www-data: /var/www/html/app/settings.php
+    echo "export CHEVERETO_DB_HOST=$CHEVERETO_DB_HOST"
+    echo "export CHEVERETO_DB_NAME=$CHEVERETO_DB_NAME"
+    echo "export CHEVERETO_DB_USER=$CHEVERETO_DB_USER"
+    echo "export CHEVERETO_DB_PASS=$CHEVERETO_DB_PASS"
+    echo "export CHEVERETO_DB_PORT=$CHEVERETO_DB_PORT"
+} >>"/etc/apache2/envvars"
+
+systemctl restart apache2
 
 cat >/etc/mysql/debian.cnf <<EOM
 # Automatically generated for Debian scripts. DO NOT TOUCH!
