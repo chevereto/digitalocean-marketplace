@@ -3,6 +3,7 @@
 - Enables the UFW firewall to allow only SSH (port 22, rate limited), HTTP (port 80), and HTTPS (port 443) access.
 - Sets the MySQL root password.
 - Sets up the debian-sys-maint user in MySQL so the system’s init scripts for MySQL will work without requiring the MySQL root user password.
+- Sets the cron required for background tasks
 
 **Chevereto Server Details**
 
