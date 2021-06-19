@@ -69,11 +69,7 @@
                 "software_chevereto={{user `software_chevereto`}}",
                 "software_tag={{user `software_tag`}}",
                 "CHEVERETO_INSTALLER_TAG={{user `installer_tag`}}",
-                "WORKING_DIR={{user `working_dir`}}",
-                "DEBIAN_FRONTEND=noninteractive",
-                "LC_ALL=C",
-                "LANG=en_US.UTF-8",
-                "LC_CTYPE=en_US.UTF-8"
+                "WORKING_DIR={{user `working_dir`}}"
             ],
             "scripts": [
                 "scripts/10-php.sh",
