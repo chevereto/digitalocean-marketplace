@@ -12,10 +12,19 @@ This repository provides the Chevereto [DigitalOcean Marketplace](https://market
 
 Install [Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli):
 
+* Ubuntu
+
 ```sh
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 sudo apt-get update && sudo apt-get install packer
+```
+
+* macOS
+
+```sh
+brew tap hashicorp/tap
+brew install hashicorp/tap/packer
 ```
 
 Provide [DigitalOcean's PAT](https://docs.digitalocean.com/reference/api/create-personal-access-token/):
