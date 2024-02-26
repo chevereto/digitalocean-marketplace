@@ -10,6 +10,9 @@ CHEVERETO_DB_PORT=3306
 CHEVERETO_DB_NAME=chevereto
 CHEVERETO_DB_USER=chevereto
 CHEVERETO_DB_PASS=$(openssl rand -hex 16)
+WORKING_DIR=/var/www/html
+CHEVERETO_ENV_FILE="$WORKING_DIR/app/env.php"
+CHEVERETO_ENCRYPTION_KEY=$(openssl rand -base64 32)
 
 cat >/root/.mysql_password <<EOM
 MYSQL_ROOT_PASS="${MYSQL_ROOT_PASS}"
@@ -23,19 +26,6 @@ mysqladmin -u root -h localhost password $MYSQL_ROOT_PASS
 
 mysql -uroot -p${MYSQL_ROOT_PASS} \
     -e "ALTER USER 'debian-sys-maint'@'localhost' IDENTIFIED BY '$DEBIAN_SYS_MAINT_MYSQL_PASS';"
-
-set -eux
-{
-    echo "export CHEVERETO_DB_HOST=$CHEVERETO_DB_HOST"
-    echo "export CHEVERETO_DB_NAME=$CHEVERETO_DB_NAME"
-    echo "export CHEVERETO_DB_USER=$CHEVERETO_DB_USER"
-    echo "export CHEVERETO_DB_PASS=$CHEVERETO_DB_PASS"
-    echo "export CHEVERETO_DB_PORT=$CHEVERETO_DB_PORT"
-    echo "export CHEVERETO_ENCRYPTION_KEY=$(openssl rand -base64 32)"
-} >>"/etc/apache2/envvars"
-
-systemctl restart apache2
-
 cat >/etc/mysql/debian.cnf <<EOM
 # Automatically generated for Debian scripts. DO NOT TOUCH!
 [client]
@@ -49,6 +39,24 @@ user     = debian-sys-maint
 password = ${DEBIAN_SYS_MAINT_MYSQL_PASS}
 socket   = /var/run/mysqld/mysqld.sock
 EOM
+
+cat >"$CHEVERETO_ENV_FILE" <<EOM
+<?php
+
+return [
+    'CHEVERETO_DB_HOST' => '${CHEVERETO_DB_HOST}',
+    'CHEVERETO_DB_NAME' => '${CHEVERETO_DB_NAME}',
+    'CHEVERETO_DB_PASS' => '${CHEVERETO_DB_PASS}',
+    'CHEVERETO_DB_PORT' => '${CHEVERETO_DB_PORT}',
+    'CHEVERETO_DB_USER' => '${CHEVERETO_DB_USER}',
+    'CHEVERETO_DB_TABLE_PREFIX' => 'chv_',
+    'CHEVERETO_ENCRYPTION_KEY' => '${CHEVERETO_ENCRYPTION_KEY}',
+];
+EOM
+
+chown -R www-data: /var/log/apache2
+chown -R www-data: /etc/apache2
+chown -R www-data: $WORKING_DIR
 
 sed -e '/Match User root/d' \
     -e '/.*ForceCommand.*server.*/d' \
