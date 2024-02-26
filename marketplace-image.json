@@ -1,12 +1,10 @@
 {
     "variables": {
         "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}",
-        "image_name": "chevereto-installer-2.2.3-{{timestamp}}",
+        "image_name": "chevereto-{{timestamp}}",
         "apt_packages": "apache2 libapache2-mod-php mysql-server php php-common php-cli php-curl php-fileinfo php-gd php-imagick php-intl php-json php-mbstring php-mysql php-opcache php-pdo php-pdo-mysql php-xml php-xmlrpc php-zip python3-certbot-apache software-properties-common unzip",
         "application_name": "Chevereto",
-        "software_chevereto": "chevereto",
-        "software_tag": "3.20",
-        "installer_tag": "2.2.3",
+        "chevereto_tag": "4",
         "working_dir": "/var/www/html"
     },
     "sensitive-variables": [
@@ -16,7 +14,7 @@
         {
             "type": "digitalocean",
             "api_token": "{{user `do_api_token`}}",
-            "image": "ubuntu-20-04-x64",
+            "image": "ubuntu-22-04-x64",
             "region": "nyc3",
             "size": "s-1vcpu-1gb",
             "ssh_username": "root",
@@ -66,10 +64,8 @@
             "type": "shell",
             "environment_vars": [
                 "application_name={{user `application_name`}}",
-                "software_chevereto={{user `software_chevereto`}}",
-                "software_tag={{user `software_tag`}}",
-                "CHEVERETO_INSTALLER_TAG={{user `installer_tag`}}",
-                "WORKING_DIR={{user `working_dir`}}"
+                "WORKING_DIR={{user `working_dir`}}",
+                "CHEVERETO_TAG={{user `chevereto_tag`}}"
             ],
             "scripts": [
                 "scripts/10-php.sh",

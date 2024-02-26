@@ -1,1 +1,1 @@
-* * * * * www-data php /var/www/html/cli.php -C cron
+* * * * * www-data php /var/www/html/app/bin/legacy -C cron

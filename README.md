@@ -2,7 +2,7 @@
 
 > 🔔 [Subscribe](https://chv.to/newsletter) to don't miss any update regarding Chevereto.
 
-![Chevereto](LOGO.svg)
+[![Chevereto](LOGO.svg)](https://chevereto.com)
 
 [![Community](https://img.shields.io/badge/chv.to-community-blue?style=flat-square)](https://chv.to/community)
 

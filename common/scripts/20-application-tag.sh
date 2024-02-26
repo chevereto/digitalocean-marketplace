@@ -18,5 +18,5 @@ distro="${distro}"
 distro_release="${distro_release}"
 distro_codename="${distro_codename}"
 distro_arch="${distro_arch}"
-application_version="${software_tag}"
+application_version="${CHEVERETO_TAG}"
 EOM

@@ -1,13 +1,13 @@
-Chevereto-Free
-https://github.com/chevereto/chevereto-free
-1.3.0
-https://github.com/chevereto/chevereto-free/releases/tag/1.3.0
-MIT
-https://github.com/chevereto/chevereto-free/blob/master/LICENSE
+Chevereto
+https://github.com/chevereto/chevereto
+latest
+https://github.com/chevereto/chevereto/releases/latest
+AGPL-3.0
+https://github.com/chevereto/chevereto/blob/master/LICENSE
 
 PHP
 https://php.net/
-7.4
+8.1
 https://www.php.net/downloads
 PHP v3.01
 http://www.php.net/license/3_01.txt
