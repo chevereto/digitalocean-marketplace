@@ -6,7 +6,7 @@
 
 [![Community](https://img.shields.io/badge/chv.to-community-blue?style=flat-square)](https://chv.to/community)
 
-This repository provides the Chevereto [DigitalOcean Marketplace](https://marketplace.digitalocean.com/apps/chevereto?refcode=f800a079f4f1) application.
+This repository provides the Chevereto [DigitalOcean Marketplace](https://chv.to/digitalocean) application.
 
 ## Install Packer
 
