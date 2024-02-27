@@ -8,7 +8,7 @@
 
 This repository provides the Chevereto [DigitalOcean Marketplace](https://marketplace.digitalocean.com/apps/chevereto?refcode=f800a079f4f1) application.
 
-## Instructions
+## Install Packer
 
 Install [Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli):
 
@@ -27,6 +27,14 @@ brew tap hashicorp/tap
 brew install hashicorp/tap/packer
 ```
 
+Init packer:
+
+```sh
+packer init .
+```
+
+## Running
+
 Provide [DigitalOcean's PAT](https://docs.digitalocean.com/reference/api/create-personal-access-token/):
 
 ```sh
@@ -36,7 +44,5 @@ export DIGITALOCEAN_API_TOKEN=token_here
 Run:
 
 ```sh
-git clone https://github.com/chevereto/digitalocean-marketplace
-cd digitalocean-marketplace/
 packer build marketplace-image.json
 ```

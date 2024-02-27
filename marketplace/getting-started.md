@@ -10,7 +10,7 @@
 
 Chevereto will be available at this URL:
 
-[http://your_droplet_public_ipv4](http://your_droplet_public_ipv4)
+`http://your_server_public_ipv4`
 
 This is an Apache HTTP server based provisioning. PHP runs with `mod_php` using `mpm_prefork`. You can run Chevereto under any configuration, check our [documentation](https://chv.to/docs) for more information.
 
@@ -40,4 +40,4 @@ mysql_secure_installation
 
 ## Updates
 
-Chevereto can update itself, simply  open [http://your_droplet_public_ipv4/dashboard](http://your_droplet_public_ipv4/dashboard) and click "check for updates" button.
+Chevereto can update itself, simply  open `http://your_server_public_ipv4/dashboard` and click "check upgrades" button.
