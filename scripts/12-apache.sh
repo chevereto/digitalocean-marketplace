@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-chown -R www-data: /var/log/apache2
-chown -R www-data: /etc/apache2
-chown -R www-data: $WORKING_DIR
+set -o errexit
 
 a2enmod rewrite
+a2enmod remoteip
+systemctl restart apache2

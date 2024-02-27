@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit
+
 CHEVERETO_API_DOWNLOAD="https://chevereto.com/api/download/"
 CHEVERETO_LABEL="Chevereto v$CHEVERETO_TAG"
 rm -rf "${WORKING_DIR}"/*

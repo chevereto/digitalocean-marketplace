@@ -2,7 +2,7 @@
     "variables": {
         "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}",
         "image_name": "chevereto-{{timestamp}}",
-        "apt_packages": "apache2 libapache2-mod-php mysql-server php php-common php-cli php-curl php-fileinfo php-gd php-imagick php-intl php-json php-mbstring php-mysql php-opcache php-pdo php-pdo-mysql php-xml php-xmlrpc php-zip python3-certbot-apache software-properties-common unzip",
+        "apt_packages": "ca-certificates apt-transport-https software-properties-common apache2 libapache2-mod-php8.2 mysql-server php8.2 php8.2-bcmath php8.2-common php8.2-cli php8.2-curl php8.2-fileinfo php8.2-gd php8.2-imagick php8.2-intl php8.2-mbstring php8.2-mysql php8.2-opcache php8.2-pdo php8.2-pdo-mysql php8.2-xml php8.2-xmlrpc php8.2-zip python3-certbot-apache unzip",
         "application_name": "Chevereto",
         "chevereto_tag": "4",
         "working_dir": "/var/www/html"
@@ -55,6 +55,8 @@
             ],
             "inline": [
                 "apt -qqy update",
+                "add-apt-repository -y ppa:ondrej/php",
+                "add-apt-repository -y ppa:ondrej/apache2",
                 "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade",
                 "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install {{user `apt_packages`}}",
                 "apt-get -qqy clean"
@@ -68,15 +70,16 @@
                 "CHEVERETO_TAG={{user `chevereto_tag`}}"
             ],
             "scripts": [
+                "scripts/09-cloudflare.sh",
                 "scripts/10-php.sh",
                 "scripts/11-installer.sh",
                 "scripts/12-apache.sh",
                 "common/scripts/03-force-ssh-logout.sh",
                 "common/scripts/14-ufw-apache.sh",
                 "common/scripts/20-application-tag.sh",
+                "common/scripts/89-cleanup.sh",
                 "common/scripts/90-cleanup.sh",
-                "common/scripts/99-img-check.sh",
-                "scripts/99-apache-reload.sh"
+                "common/scripts/99-img-check.sh"
             ]
         }
     ]

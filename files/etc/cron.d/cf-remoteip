@@ -1,0 +1,1 @@
+30 3 * * * /etc/apache2/cf-remoteip.sh >/dev/null 2>&1

@@ -58,6 +58,9 @@ chown -R www-data: /var/log/apache2
 chown -R www-data: /etc/apache2
 chown -R www-data: $WORKING_DIR
 
+chmod +x /etc/apache2/cf-remoteip.sh
+/etc/apache2/cf-remoteip.sh
+
 sed -e '/Match User root/d' \
     -e '/.*ForceCommand.*server.*/d' \
     -i /etc/ssh/sshd_config
