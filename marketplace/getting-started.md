@@ -12,7 +12,7 @@ Chevereto will be available at this URL:
 
 `http://your_server_public_ipv4`
 
-This is an Apache HTTP server based provisioning. PHP runs with `mod_php` using `mpm_prefork`. You can run Chevereto under any configuration, check our [documentation](https://chv.to/docs) for more information.
+This is an Apache HTTP server based provisioning. PHP runs with `mod_php` using `mpm_prefork`. You can run Chevereto under any configuration, check our [documentation](https://chevereto.com/go/docs) for more information.
 
 ## Credentials
 

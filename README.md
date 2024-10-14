@@ -1,12 +1,12 @@
 # DigitalOcean Marketplace
 
-> 🔔 [Subscribe](https://chv.to/newsletter) to don't miss any update regarding Chevereto.
+> 🔔 [Subscribe](https://chevereto.com/go/newsletter) to don't miss any update regarding Chevereto.
 
 [![Chevereto](LOGO.svg)](https://chevereto.com)
 
-[![Community](https://img.shields.io/badge/chv.to-community-blue?style=flat-square)](https://chv.to/community)
+[![Community](https://img.shields.io/badge/chevereto.com/go-community-blue?style=flat-square)](https://chevereto.com/go/community)
 
-This repository provides the Chevereto [DigitalOcean Marketplace](https://chv.to/digitalocean) application.
+This repository provides the Chevereto [DigitalOcean Marketplace](https://chevereto.com/go/digitalocean) application.
 
 ## Install Packer
 
